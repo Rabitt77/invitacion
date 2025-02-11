@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Invitación?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('io.jpg'); /* Asegúrate de poner el nombre y la extensión correcta */
+            background-size: cover; /* Para que la imagen cubra toda la pantalla */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            width: 400px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            z-index: 2;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 60%;
+        }
+        .yes { 
+            background-color: lightgreen;
+        }
+        .no { 
+            background-color: lightcoral;
+            position: absolute;
+        }
+        
+        /* Estilo para las estrellas grandes */
+        .star {
+            position: absolute;
+            color: gold;
+            font-size: 20px;
+            opacity: 0.5;
+            animation: twinkle 2s linear infinite;
+            z-index: 1;
+        }
+
+        /* Estilo para los destellos pequeños de colores */
+        .sparkle {
+            position: absolute;
+            font-size: 12px;
+            opacity: 0.5;
+            animation: sparkleEffect 1.5s linear infinite;
+            z-index: 1;
+        }
+        
+        /* Animaciones de destellos */
+        @keyframes twinkle {
+            0% { opacity: 0.5; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.5; transform: scale(0.8); }
+        }
+        @keyframes sparkleEffect {
+            0% { opacity: 0.5; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.5); }
+            100% { opacity: 0.5; transform: scale(0.5); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Ruby Jaqueline, ¿Te gustaría salir a cenar conmigo este 14 de Febrero?</h2>
+        <button class="yes" onclick="aceptar()">Sí</button>
+        <button class="no" id="noButton" onclick="cambiarTexto(this)">No</button>
+    </div>
+
+    <script>
+        function crearEstrellas() {
+            const cantidad = 30; // Número de estrellas grandes
+            for (let i = 0; i < cantidad; i++) {
+                const estrella = document.createElement('div');
+                estrella.classList.add('star');
+                estrella.textContent = '✨'; // Estrella grande
+                estrella.style.left = `${Math.random() * 100}vw`;
+                estrella.style.top = `${Math.random() * 100}vh`;
+                estrella.style.animationDuration = `${Math.random() * 3 + 1}s`; 
+                document.body.appendChild(estrella);
+            }
+        }
+        
+        function crearDestellos() {
+            const colores = ['yellow', 'pink', 'green', 'purple'];
+            const cantidad = 50; // Número de destellos pequeños
+            for (let i = 0; i < cantidad; i++) {
+                const destello = document.createElement('div');
+                destello.classList.add('sparkle');
+                destello.textContent = '✦'; // Destello pequeño
+                destello.style.left = `${Math.random() * 100}vw`;
+                destello.style.top = `${Math.random() * 100}vh`;
+                destello.style.color = colores[Math.floor(Math.random() * colores.length)];
+                destello.style.animationDuration = `${Math.random() * 2 + 1}s`;
+                document.body.appendChild(destello);
+            }
+        }
+        
+        // Llamar las funciones al cargar la página
+        window.onload = function() {
+            setTimeout(() => {
+                crearEstrellas();
+                crearDestellos();
+            }, 500);
+        };
+
+        const respuestas = [
+            "¿Estás segura?",
+            "¡Piénsalo otra vez!",
+            "¡Última oportunidad!",
+            "¡Yo sé que quieres!",
+            "¡Ándaleee!",
+            "¡Deja de ponerle que no!",
+            "¡Ya di que sí!"
+        ];
+        let contador = 0;
+
+        function cambiarTexto(boton) {
+            if (contador < respuestas.length) {
+                boton.textContent = respuestas[contador];
+                contador++;
+                moverBoton(boton);
+            } else {
+                boton.style.display = 'none';
+            }
+        }
+
+        function moverBoton(boton) {
+            const card = document.querySelector(".card");
+            const maxX = card.clientWidth - boton.clientWidth - 20;
+            const maxY = card.clientHeight - boton.clientHeight - 20;
+            const newX = Math.floor(Math.random() * maxX);
+            const newY = Math.floor(Math.random() * maxY);
+            boton.style.left = newX + "px";
+            boton.style.top = newY + "px";
+        }
+
+        function aceptar() {
+            document.querySelector(".card").innerHTML = "<h2>¡Gracias bonita! ❤️ Será una noche mágica como en Disney ✨</h2>";
+        }
+    </script>
+</body>
+</html>
