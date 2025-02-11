@@ -10,18 +10,18 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('io.jpg'); /* Asegúrate de poner el nombre y la extensión correcta */
-            background-size: cover; /* Para que la imagen cubra toda la pantalla */
-            font-family: Arial, sans-serif;
+            background-color: #ff4075;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             overflow: hidden;
             position: relative;
         }
         .card {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+            padding: 60px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
             text-align: center;
             position: relative;
             width: 400px;
@@ -31,27 +31,43 @@
             justify-content: space-evenly;
             align-items: center;
             z-index: 2;
-        }
+            background-image: url('io2.jpg'); /* Reemplaza con tu imagen de fondo */
+            background-size: cover;
+            background-position: 50% 120%; /* Centrado horizontal, un poco más arriba verticalmente */
+}
         h2 {
-            margin-bottom: 20px;
-        }
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #0c0306;
+    text-shadow: 22px 23px 5px rgba(0, 0, 0, 0.2), 0 0 15px rgb(0, 0, 0); /* Agregar borde negro */
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 1px;
+}
         button {
-            margin: 10px;
+            margin: -35px;
             padding: 15px 30px;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 18px;
             width: 60%;
+            transition: all 0.3s ease;
         }
         .yes { 
-            background-color: lightgreen;
+            background-color: #3ef319;
+            color:  #7e002a;
         }
         .no { 
-            background-color: lightcoral;
-            position: absolute;
+            background-color: #ff4075;
+            color: white;
         }
-        
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
         /* Estilo para las estrellas grandes */
         .star {
             position: absolute;
@@ -70,7 +86,7 @@
             animation: sparkleEffect 1.5s linear infinite;
             z-index: 1;
         }
-        
+
         /* Animaciones de destellos */
         @keyframes twinkle {
             0% { opacity: 0.5; transform: scale(0.8); }
@@ -86,12 +102,14 @@
 </head>
 <body>
     <div class="card">
-        <h2>Ruby Jaqueline, ¿Te gustaría salir a cenar conmigo este 14 de Febrero?</h2>
+        <h2>Ruby Jaqueline, ¿Te gustaría salir a cenar conmigo este 14 de Febrero? </h2>
         <button class="yes" onclick="aceptar()">Sí</button>
         <button class="no" id="noButton" onclick="cambiarTexto(this)">No</button>
     </div>
 
     <script>
+        let contador = 0; // Mover la declaración fuera de la función para mantener el estado
+
         function crearEstrellas() {
             const cantidad = 30; // Número de estrellas grandes
             for (let i = 0; i < cantidad; i++) {
@@ -120,7 +138,6 @@
             }
         }
         
-        // Llamar las funciones al cargar la página
         window.onload = function() {
             setTimeout(() => {
                 crearEstrellas();
@@ -128,21 +145,20 @@
             }, 500);
         };
 
-        const respuestas = [
-            "¿Estás segura?",
-            "¡Piénsalo otra vez!",
-            "¡Última oportunidad!",
-            "¡Yo sé que quieres!",
-            "¡Ándaleee!",
-            "¡Deja de ponerle que no!",
-            "¡Ya di que sí!"
-        ];
-        let contador = 0;
-
         function cambiarTexto(boton) {
+            const respuestas = [
+                "¿Estás segura?",
+                "¡Piénsalo otra vez!",
+                "¡Última oportunidad!",
+                "¡Yo sé que quieres!",
+                "¡Ándaleee!",
+                "¡Deja de ponerle que no!",
+                "¡Ya di que sí!"
+            ];
+
             if (contador < respuestas.length) {
                 boton.textContent = respuestas[contador];
-                contador++;
+                contador++; // Incrementar el contador
                 moverBoton(boton);
             } else {
                 boton.style.display = 'none';
@@ -160,7 +176,7 @@
         }
 
         function aceptar() {
-            document.querySelector(".card").innerHTML = "<h2>¡Gracias bonita! ❤️ Será una noche mágica como en Disney ✨</h2>";
+            document.querySelector(".card").innerHTML = "<h2>¡Gracias bonita ,creeme será una agradable cena para ti 🤍 </h2>";
         }
     </script>
 </body>
