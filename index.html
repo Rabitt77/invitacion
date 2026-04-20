@@ -1,26 +1,149 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Feliz Aniversario ❤️</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;justify-content:center;align-items:center;background:linear-gradient(135deg,#1a0010,#3b0a2a,#6d133f);font-family:Arial,sans-serif;overflow:hidden;color:#fff}.wrap{text-align:center;position:relative;padding:20px}.envelope{width:260px;height:170px;background:#ffcad4;position:relative;margin:auto;border-radius:0 0 12px 12px;box-shadow:0 15px 35px rgba(0,0,0,.35);cursor:pointer}.flap{position:absolute;top:0;left:0;width:0;height:0;border-left:130px solid transparent;border-right:130px solid transparent;border-top:95px solid #ff8fab;transform-origin:top;transition:transform 1.2s ease;z-index:3}.letter{position:absolute;left:15px;right:15px;top:20px;height:130px;background:#fff;color:#c2185b;border-radius:10px;padding:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;transform:translateY(35px);transition:1.2s}.rose{font-size:90px;opacity:0;transform:translateY(60px) scale(.2) rotate(-30deg);transition:1.5s ease}.msg{max-width:700px;margin-top:25px;font-size:1.25rem;line-height:1.6;opacity:0;transform:translateY(30px);transition:1.5s}.hearts span{position:fixed;bottom:-30px;font-size:20px;animation:float 8s linear infinite;opacity:.8}@keyframes float{to{transform:translateY(-110vh) rotate(360deg);opacity:0}}.open .flap{transform:rotateX(180deg)}.open .letter{transform:translateY(-90px)}.open .rose{opacity:1;transform:translateY(-40px) scale(1) rotate(0)}.open .msg{opacity:1;transform:translateY(0)}
+body{
+    margin:0;
+    padding:0;
+    background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+    font-family:Arial, sans-serif;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    text-align:center;
+    position:relative;
+}
+
+.envelope{
+    width:220px;
+    height:140px;
+    background:#ff4d6d;
+    position:relative;
+    margin:auto;
+    border-radius:10px;
+    cursor:pointer;
+    box-shadow:0 10px 20px rgba(0,0,0,.2);
+}
+
+.flap{
+    position:absolute;
+    top:0;
+    left:0;
+    width:0;
+    height:0;
+    border-left:110px solid transparent;
+    border-right:110px solid transparent;
+    border-top:70px solid #ff758f;
+    transform-origin:top;
+    transition:1s;
+}
+
+.open .flap{
+    transform:rotateX(180deg);
+}
+
+.rose{
+    font-size:70px;
+    position:absolute;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%) scale(0);
+    transition:1s;
+}
+
+.open .rose{
+    top:-90px;
+    transform:translateX(-50%) scale(1);
+}
+
+.message{
+    margin-top:30px;
+    font-size:20px;
+    color:white;
+    max-width:340px;
+    opacity:0;
+    transition:2s;
+}
+
+.open + .message{
+    opacity:1;
+}
+
+img{
+    width:220px;
+    border-radius:15px;
+    margin-top:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.date{
+    margin-top:10px;
+    color:white;
+    font-size:18px;
+}
+
+button{
+    margin-top:15px;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#fff;
+    color:#ff4d6d;
+    font-weight:bold;
+    cursor:pointer;
+}
 </style>
 </head>
+
 <body>
-<div class="hearts" id="hearts"></div>
-<div class="wrap" id="scene">
-<div class="envelope" onclick="openLetter()">
-<div class="flap"></div>
-<div class="letter">Ábreme mi amor 💌</div>
+
+<div class="container">
+    <div class="envelope" onclick="openLetter()" id="env">
+        <div class="flap"></div>
+        <div class="rose">🌹</div>
+    </div>
+
+    <div class="message">
+        Feliz aniversario amor ❤️<br>
+        Te amo no lo imaginas.<br>
+        Para mí eres lo más importante del mundo 🌎🌍<br>
+        Eres mi vida, tú y mi pequeña estrella de perro ✨🐶<br>
+        Soy muy feliz por haberte conocido 💖
+        
+        <div>
+            <img src="IMG20250906182059.jpg" alt="Nuestra foto">
+        </div>
+
+        <div class="date" id="fecha"></div>
+
+        <button onclick="window.open('https://youtu.be/450p7goxZqg','_blank')">
+            🎵 Nuestra canción
+        </button>
+    </div>
 </div>
-<div class="rose">🌹</div>
-<div class="msg">Feliz aniversario amor ❤️<br>Te amo, no lo imaginas.<br>Para mí eres lo más importante del mundo 🌎🌍<br>Eres mi vida, tú y mi pequeña estrella de perro 🐶✨<br>Soy muy feliz por haberte conocido.</div>
-</div>
+
 <script>
-function openLetter(){document.getElementById('scene').classList.add('open')}
-const hearts=document.getElementById('hearts');setInterval(()=>{const s=document.createElement('span');s.innerHTML='❤';s.style.left=Math.random()*100+'vw';s.style.animationDuration=(4+Math.random()*5)+'s';s.style.fontSize=(14+Math.random()*22)+'px';hearts.appendChild(s);setTimeout(()=>s.remove(),9000)},350);
-setTimeout(openLetter,1200);
+function openLetter(){
+    document.getElementById("env").classList.toggle("open");
+}
+
+const hoy = new Date();
+document.getElementById("fecha").innerHTML =
+"📅 " + hoy.toLocaleDateString("es-MX", {
+day:"numeric",
+month:"long",
+year:"numeric"
+});
 </script>
+
 </body>
 </html>
